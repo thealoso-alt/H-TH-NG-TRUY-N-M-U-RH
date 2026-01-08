@@ -1,11 +1,11 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { BloodTypeID, InteractionMode } from './types';
-import { BLOOD_TYPES, getDonorsFor, getRecipientsFor } from './constants';
-import BloodNode from './components/BloodNode';
-import GeminiInsight from './components/GeminiInsight';
-import ConnectionLines from './components/ConnectionLines';
-import VoiceAssistant from './components/VoiceAssistant';
+import { BloodTypeID, InteractionMode } from './types.ts';
+import { BLOOD_TYPES, getDonorsFor, getRecipientsFor } from './constants.ts';
+import BloodNode from './components/BloodNode.tsx';
+import GeminiInsight from './components/GeminiInsight.tsx';
+import ConnectionLines from './components/ConnectionLines.tsx';
+import VoiceAssistant from './components/VoiceAssistant.tsx';
 
 const App: React.FC = () => {
   const [selectedId, setSelectedId] = useState<BloodTypeID | null>(null);
@@ -18,8 +18,13 @@ const App: React.FC = () => {
   useEffect(() => {
     const checkKey = async () => {
       // @ts-ignore
-      const selected = await window.aistudio.hasSelectedApiKey();
-      setHasApiKey(selected);
+      if (window.aistudio && typeof window.aistudio.hasSelectedApiKey === 'function') {
+        const selected = await window.aistudio.hasSelectedApiKey();
+        setHasApiKey(selected);
+      } else {
+        // Fallback nếu không chạy trong môi trường AI Studio đặc biệt
+        setHasApiKey(true);
+      }
     };
     checkKey();
   }, []);
