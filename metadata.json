@@ -1,0 +1,7 @@
+{
+  "name": "Hệ thống truyền máu hệ Rh",
+  "description": "Phần mềm mô phỏng tương tác truyền máu hệ Rh và ABO. Tác giả: Nguyễn Văn Nam - GV Sinh học THPT Bình Sơn - Quảng Ngãi.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
